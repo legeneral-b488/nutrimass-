@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#0f1117" />
+  <title>NutriMass</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="shortcut icon" href="icons/icon-192x192.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="hdr">
+      <div class="hdr-top">
+        <div class="logo">
+          <span class="logo-emoji">💪</span>
+          <span class="logo-text">NutriMass</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <button id="btnInstall" class="btn-icon" aria-label="Installer" style="display:none;">
+            ⬇️
+          </button>
+          <button id="btnRem" class="btn-icon" aria-label="Rappels">
+            🔔 <span id="remBadge" class="badge"></span>
+          </button>
+        </div>
+      </div>
+      <div class="hdr-bars" id="hdrBars">
+        <div class="bar-row">
+          <div class="bar-item">
+            <div class="bar-label">Calories</div>
+            <div class="bar">
+              <div class="bar-fill" data-key="kcal"></div>
+            </div>
+            <div class="bar-value" data-key="kcal">0%</div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label">Prot</div>
+            <div class="bar">
+              <div class="bar-fill" data-key="pro"></div>
+            </div>
+            <div class="bar-value" data-key="pro">0%</div>
+          </div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-item">
+            <div class="bar-label">Gluc</div>
+            <div class="bar">
+              <div class="bar-fill" data-key="car"></div>
+            </div>
+            <div class="bar-value" data-key="car">0%</div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label">Lip</div>
+            <div class="bar">
+              <div class="bar-fill" data-key="fat"></div>
+            </div>
+            <div class="bar-value" data-key="fat">0%</div>
+          </div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-item full">
+            <div class="bar-label">🥦 Légumes</div>
+            <div class="bar">
+              <div class="bar-fill" data-key="veg"></div>
+            </div>
+            <div class="bar-value" data-key="veg">0%</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <nav class="tabbar" id="tabbar">
+      <button class="tab" data-page="p-dash">⚡ Accueil</button>
+      <button class="tab" data-page="p-coll">🍎 Collations</button>
+      <button class="tab" data-page="p-stock">🥩 Stock</button>
+      <button class="tab" data-page="p-shop">🛒 Courses <span class="badge" id="shopBadge"></span></button>
+      <button class="tab" data-page="p-reps">🍽 Repas</button>
+      <button class="tab" data-page="p-week">📅 Semaine</button>
+    </nav>
+
+    <main class="pages">
+      <section id="p-dash" class="page on"></section>
+      <section id="p-coll" class="page"></section>
+      <section id="p-stock" class="page"></section>
+      <section id="p-shop" class="page"></section>
+      <section id="p-reps" class="page"></section>
+      <section id="p-week" class="page"></section>
+    </main>
+
+    <div id="modal" class="modal" aria-hidden="true">
+      <div class="modal-overlay" data-action="close"></div>
+      <div class="modal-sheet" role="dialog" aria-modal="true">
+        <div class="modal-header">
+          <div class="modal-title" id="modalTitle"></div>
+          <button class="btn-icon" data-action="close" aria-label="Fermer">✕</button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <div id="rems" class="rems"></div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
+  </script>
+</body>
+</html>
